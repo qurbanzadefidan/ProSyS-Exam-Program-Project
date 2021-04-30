@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Imtahan Proqramı</title>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+
+<body ng-app="myApp" ng-controller="myCtrl">
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+
+      <h1 class="title">Imtahan Proqramı</h1>
+      <p class="text-align-center">Keçiriləcək dərslərin qeydiyyatı.</p>
+    </div>
+  </header>
+  <!-- Header Section End -->
+
+
+  <!-- Main Section End -->
+
+<main>
+  <div class="container">
+    <div class="col-sm-12">
+      <form ng-submit="addUser();">
+        <div class="row">
+          <div class="form-group">
+            <label for="exampleInputEmail3">Dərsin Kodu</label>
+            <input type="number" class="form-control" id="exampleInputEmail3" ng-model="lesson_code"
+              placeholder="Dərsin Kodu...">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Dərsin Adı</label>
+            <input type="text" class="form-control" id="exampleInputEmail3" ng-model="lesson_name"
+              placeholder="Dərsin Adı...">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Sinifi</label>
+            <input type="number" ng-model="lesson_class" class="form-control" id="exampleInputEmail3"
+              placeholder="Sinifi....">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail3">Dərs verən müəllimin adı</label>
+            <input type="text" ng-model="new_name" class="form-control" id="exampleInputEmail3"
+              placeholder="Müəllimin adı..">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Dərs verən müəllimin soyadı</label>
+            <input ng-model="new_surname" class="form-control" id="exampleInputEmail3"
+              placeholder="Müəllimin soyadı...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="ml-auto">
+            <button type="submit" class="btn btn-primary">Dərsi qeydiyyatdan keçir</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+
+  <div class="container">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 50%;">
+      <p>Ümumi dərs sayı: {{ user_list.length }}</p>
+
+      <form onsubmit="return false;">
+
+        <select ng-model="column_name" ng-change="searchUser();">
+          <option value="name" selected>Axtarış et</option>
+          <option value="name">Ad</option>
+          <option value="surname">Soyad</option>
+        </select>
+        <input type="search" ng-model="search_text" placeholder="buraya yazaraq axtar..." ng-keyup="searchUser();" />
+      </form>
+    </div>
+  </div>
+  </div>
+
+  <hr />
+  <div class="container">
+
+    <table border="1" cellspacing="0" cellpadding="5" width="100%">
+      <thead>
+        <tr>
+          <th>Dərsin kodu<button type="button" ng-click="orderBy('lesson_code');"
+              class="{{ (!order_status_list.lesson_code) ? 'red' : 'green' }} btn "> {{ (!order_status_list.lesson_code)
+              ? '↓' : '↑' }}</button> </th>
+          <th>Dərsin Adı <button type="button" ng-click="orderBy('lesson_name');"
+              class="{{ (!order_status_list.lesson_name) ? 'red' : 'green' }} btn "> {{ (!order_status_list.lesson_name)
+              ? '↓' : '↑' }}</button> </th>
+          <th>Sinifi <button type="button" ng-click="orderBy('lesson_class');"
+              class="{{ (!order_status_list.lesson_class) ? 'red' : 'green' }} btn "> {{
+              (!order_status_list.lesson_class) ? '↓' : '↑' }}</button> </th>
+          <th>Müəllimin adı <button type="button" ng-click="orderBy('name');"
+              class="{{ (!order_status_list.name) ? 'red' : 'green' }} btn "> {{ (!order_status_list.name) ? '↓' : '↑'
+              }}</button> </th>
+          <th>Müəllimin Soyadı <button type="button" ng-click="orderBy('surname');"
+              class=" {{ (!order_status_list.surname) ? 'red' : 'green' }} btn">{{ (!order_status_list.surname) ? '↓' :
+              '↑' }}</button></th>
+          <th>Düzəliş et / Sil</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+
+        <tr align="center"
+          ng-repeat="(key, item) in user_list  | orderBy : order_name : order_status | filter : filter_object ">
+          <td contenteditable="{{item.edit}}" onchange="updateValue('lesson_code', this);">{{ item.lesson_code }}</td>
+          <td contenteditable="{{item.edit}}" onchange="updateValue('lesson_name', this);">{{ item.lesson_name }}</td>
+          <td contenteditable="{{item.edit}}" onchange="updateValue('lesson_class', this);">{{ item.lesson_class }}</td>
+
+          <td contenteditable="{{item.edit}}" onchange="updateValue('name', this);">{{ item.name }}</td>
+          <td contenteditable="{{item.edit}}" onchange="updateValue('surname', this);">{{ item.surname }}</td>
+          <td>
+            <button type="button" ng-click="updateUser(key); "> {{ (item.edit) ? 'Update' : 'Edit' }} </button> |
+            <button type="button" ng-click="removeUser(key);">Delete</button>
+          </td>
+        </tr>
+
+      </tbody>
+
+
+    </table>
+    <div class="container pages">
+      <div class="next_page">
+        <div class="">
+          <button type="submit" class="btn btn-primary"><a href="students.html">Şagirdlərin qeydiyyatına keç
+              ➝</a></button>
+        </div>
+      </div>
+      <div class="next_page">
+        <div class="">
+          <button type="submit" class="btn btn-primary"><a href="exam.html">İmtahanların Qeydiyyatına keç ➝</a></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+<!-- Main Section End -->
+  <script src="./js/angular.min.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

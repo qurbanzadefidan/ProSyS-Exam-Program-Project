@@ -1,0 +1,106 @@
+body {
+    padding: 0;
+    margin: 0;
+	font-weight: normal;
+	background-color: #F7F7F7;
+}
+
+button,
+*[type="button"] {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+.btn:focus {
+	outline: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+}
+
+ul {
+	list-style-type: none;
+	margin-bottom: 0;
+	padding-left: 0;
+}
+
+a {
+	color: #191919;
+}
+
+.btn{
+    color: #fff;
+}
+
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+label {
+margin-bottom: 0;
+margin-left: 1px;
+}
+form .row{    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.student{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0;
+    margin-right: 0;
+}
+.title{
+    text-align: center;
+    color: #007bff;
+    padding: 50px;
+    background-color: #f2efef3b;
+}
+header p{
+    background-color: #007bff;
+    padding: 17px;
+    color: white;
+    font-size: 23px;
+    margin-bottom: 50px;
+}
+header .des{
+    background-color: #007bff;
+    padding: 17px;
+    color: white;
+    margin: 157px 0px 50px 0px;
+    font-size: 23px;
+}
+
+.next_page {
+    margin: 50px 0px;
+    text-align: right;
+}	
+.next_page button{
+    padding: 16px;
+}
+.next_page button:hover{
+background-color: rgb(0, 17, 255);
+}
+.next_page a{
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+.next_page a:hover{
+ text-decoration: none;
+}
+
+.pages {
+display: flex;
+align-items: center;
+justify-content: space-around;
+}

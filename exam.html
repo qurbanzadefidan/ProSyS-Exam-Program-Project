@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Imtahan Proqramı</title>
+	  <!-- Style files -->
+
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
+      <link rel="stylesheet" href="./css/style.css">
+
+   </head>
+
+   <body ng-app="myAppExam" ng-controller="myCtrl3"  >
+      <!-- Header Section -->
+      <header>
+         <div class="container">
+            <p class="des">İmtahanların qeydiyyatı.</p>
+         </div>
+      </header>
+      <!-- Header Section End -->
+      <!-- Main Section -->
+      <main>
+         <div class="container">
+        
+               <div class="col-sm-12">
+                  <form ng-submit="addExam();" >
+                     <div class="row">
+                        <div class="form-group">
+                           <label for="exampleInputEmail3">Dərsin Kodu</label> 
+                           <input type="number" class="form-control" id="exampleInputEmail3"  ng-model="lesson_code" placeholder="Dərsin Kodu...">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputEmail3">Şagirdin nömrəsi</label> 
+                           <input type="number" class="form-control" id="exampleInputEmail3"  ng-model="student_code" placeholder="Şagirdin nömrəsi...">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputEmail3">İmtahan tarixi</label>
+                           <input  type="date" ng-model="lesson_date" class="form-control" id="exampleInputEmail3" placeholder="İmtahan tarixi....">
+                        </div>
+                        <div class="form-group">
+                           <label for="exampleInputEmail3">Qiyməti</label>
+                           <input  type="number" ng-model="price" class="form-control" id="exampleInputEmail3" placeholder="Qiyməti....">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="ml-auto" >
+                           <button type="submit" class="btn btn-primary">İmtahanları qeydiyyatdan keçir</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <br/>
+         </div>
+         <div class="container">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%">
+               <thead>
+                  <tr>
+                     <th>Dərsin kodu<button type="button" ng-click="orderBy('lesson_code');" class="{{ (!order_status_list.lesson_code) ? 'red' : 'green' }} btn "  > {{ (!order_status_list.lesson_code) ? '↓' : '↑' }}</button> </th>
+                     <th>Şagirdin nömrəsi  <button type="button" ng-click="orderBy('student_code');" class="{{ (!order_status_list.student_code) ? 'red' : 'green' }} btn "  > {{ (!order_status_list.student_code) ? '↓' : '↑' }}</button> </th>
+                     <th>İmtahan tarixi <button type="button" ng-click="orderBy('lesson_date');" class="{{ (!order_status_list.lesson_date) ? 'red' : 'green' }} btn "  > {{ (!order_status_list.lesson_date) ? '↓' : '↑' }}</button> </th>
+                     <th>Qiyməti <button type="button" ng-click="orderBy('price');" class="{{ (!order_status_list.price) ? 'red' : 'green' }} btn "  > {{ (!order_status_list.price) ? '↓' : '↑' }}</button> </th>
+                     <th>Düzəliş et / Sil</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr align="center" ng-repeat="(key, item) in exam_list  | orderBy : order_exam : order_exam_status | filter : filter_object "  >
+                     <td contenteditable="{{item.edit}}" onchange="updateValue('lesson_code', this);" >{{ item.lesson_code  }}</td>
+                     <td contenteditable="{{item.edit}}" onchange="updateValue('student_code', this);" >{{ item.student_code  }}</td>
+                     <td contenteditable="{{item.edit}}" onchange="updateValue('lesson_date', this);" >{{ item.lesson_date  }}</td>
+                     <td contenteditable="{{item.edit}}" onchange="updateValue('price', this);" >{{ item.price  }}</td>
+                     <td>
+                        <button type="button" ng-click="updateExam(key); "> {{ (item.edit) ? 'Update' : 'Edit' }} </button> | 
+                        <button type="button" ng-click="removeExam(key);" >Delete</button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <div class="container pages">
+               <div class="next_page">
+                  <div class="" >
+                     <button type="submit" class="btn btn-primary"><a href="index.html">⟵ Dərslərin qeydiyyatına keç</a></button>
+                  </div>
+               </div>
+               <div class="next_page">
+                  <div class="" >
+                     <button type="submit" class="btn btn-primary"><a href="students.html"> ⟵ Şagirdin Qeydiyyatına keç</a></button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+      <!-- Main Section End -->
+
+	  <!-- JS files -->
+      <script src="./js/angular.min.js"></script>
+      <script src="./js/main.js"></script>
+</html>
